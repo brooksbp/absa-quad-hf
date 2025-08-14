@@ -4,17 +4,36 @@ This repo attempts to reproduce the results from [Aspect Sentiment Quad Predicti
 
 ## Setup
 
-```
-cmd.exe
-python -m venv .venv
-.venv\Scripts\activate.bat
+Create Python virtual environment.
 
-pip install torch --index-url https://download.pytorch.org/whl/cu118
-pip install transformers
-pip install datasets
-pip install accelerate
-pip install evaluate
-pip install rouge-score
+On Linux:
+
+```
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+```
+
+On Windows:
+
+```
+> python -m venv .venv
+> .venv\Scripts\activate.bat
+```
+
+Install PyTorch. Use ```nvcc --version``` from CUDA Toolkit to determine CUDA version.
+
+```
+$ pip install torch --index-url https://download.pytorch.org/whl/cu129
+```
+
+Install remaining packages:
+
+```
+$ pip install transformers
+$ pip install datasets
+$ pip install accelerate
+$ pip install evaluate
+$ pip install rouge-score
 ```
 
 ## Example usage
@@ -22,7 +41,7 @@ pip install rouge-score
 Fine tune ``t5-small`` model on the training split of the ``rest15`` dataset--a dataset for the Aspect Sentiment Quad Prediction task.
 
 ```
-python absa-quad-hf.py --dataset rest15 --base-model t5-small --train
+$ python absa-quad-hf.py --dataset rest15 --base-model t5-small --train
 ```
 
 Run inference on a random sample. Given an input sentence, predict the resulting aspect sentiment quad in paraphrased form.
